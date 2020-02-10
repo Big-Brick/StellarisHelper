@@ -17,3 +17,9 @@ HasValidCivicInvalid: List[str] = ['category = {  }', 'sgffd = tech_starbase_4']
 
 HasTraditionValid: List[str] = ['has_tradition = tech_starbase_4']
 HasTraditionInvalid: List[str] = ['category = {  }', 'sgffd = tech_starbase_4']
+
+HasEthicValid: List[str] = ['has_ethic = ethic_militarist']
+HasEthicInvalid: List[str] = ['has_dsfsfd = ethic_militarist', 'has_ethic = {ethic_militarist}', 'has_ethic = "ethic_militarist"']
+
+StringValueValid: List[str] = ['foo = bar']
+StringValueInvalid: List[str] = ['foo = ', ' = bar', 'foo = {"bar", "baz"}']

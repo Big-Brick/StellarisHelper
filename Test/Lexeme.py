@@ -102,5 +102,17 @@ class HasTraditionTests(unittest.LexemeTests):
 		HasTraditionTests.mySetUpClass(Lexeme.HasTraditionLexeme, LexemeTestStrings.HasTraditionValid, LexemeTestStrings.HasTraditionInvalid)
 
 
+class HasEthicTests(unittest.LexemeTests):
+	@classmethod
+	def setUpClass(cls) -> None:
+		HasEthicTests.mySetUpClass(Lexeme.HasEthicLexeme, LexemeTestStrings.HasEthicValid, LexemeTestStrings.HasEthicInvalid)
+
+
+class StringValueTests(unittest.LexemeTests):
+	@classmethod
+	def setUpClass(cls) -> None:
+		StringValueTests.mySetUpClass(Lexeme.StringValueLexeme, LexemeTestStrings.StringValueValid, LexemeTestStrings.StringValueInvalid)
+
+
 if __name__ == '__main__':
 	unittest.main()
