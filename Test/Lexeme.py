@@ -3,7 +3,7 @@ import re
 from typing import Match, List
 
 from Code.Classes import Lexeme
-from Data.Constants import RegExps
+from Data.Constants import RegExps, LexemeTestStrings
 
 
 def regex_testing(self) -> None:
@@ -46,108 +46,60 @@ class FixedNameDecoratorTests(unittest.TestCase):
 		self.assertIsInstance(Lexeme.HasEthicLexeme.create_dummy_lexeme(), Lexeme.HasEthicLexeme)
 
 
-class TechPrerequisitesTests(unittest.TestCase):
+class LexemeTests(unittest.TestCase):
 	@classmethod
 	def setUpClass(cls) -> None:
-		cls.tested_lexeme: type(Lexeme.Lexeme) = Lexeme.TechPrerequisitesLexeme
+		cls.tested_lexeme: type(Lexeme.Lexeme) = Lexeme.Lexeme
 		cls.valid_strings: List[str] = list()
 		cls.invalid_strings: List[str] = list()
-		cls.valid_strings.append('prerequisites = { "tech_starbase_4" "tech_modular_engineering" }')
-		cls.valid_strings.append('prerequisites = { "tech_starbase_4" }')
-		cls.invalid_strings.append('prerequisites = {  }')
-		cls.invalid_strings.append('prerequisites = "tech_starbase_4"')
 
-	def test_regex(self):
+	@classmethod
+	def mySetUpClass(cls, lex_type: type(Lexeme.Lexeme), valid_strings: List[str], invalid_strings: List[str]) -> None:
+		cls.tested_lexeme = lex_type
+		cls.valid_strings = valid_strings
+		cls.invalid_strings = invalid_strings
+
+	def test_regex(self) -> None:
 		regex_testing(self)
 
-	def test_creation(self):
+	def test_creation(self) -> None:
 		creation_testing(self)
 
 
-class TechCategoryTests(unittest.TestCase):
+class TechPrerequisitesTests(unittest.LexemeTests):
 	@classmethod
 	def setUpClass(cls) -> None:
-		cls.tested_lexeme: type(Lexeme.Lexeme) = Lexeme.TechCategoryLexeme
-		cls.valid_strings: List[str] = list()
-		cls.invalid_strings: List[str] = list()
-		cls.valid_strings.append('category = { tech_starbase_4 }')
-		cls.invalid_strings.append('category = {  }')
-		cls.invalid_strings.append('sgffd = "tech_starbase_4"')
-
-	def test_regex(self):
-		regex_testing(self)
-
-	def test_creation(self):
-		creation_testing(self)
+		TechPrerequisitesTests.mySetUpClass(Lexeme.TechPrerequisitesLexeme, LexemeTestStrings.TechPrerequisitesValid, LexemeTestStrings.TechPrerequisitesInvalid)
 
 
-class SetValueTests(unittest.TestCase):
+class TechCategoryTests(unittest.LexemeTests):
 	@classmethod
 	def setUpClass(cls) -> None:
-		cls.tested_lexeme: type(Lexeme.Lexeme) = Lexeme.SetValueLexeme
-		cls.valid_strings: List[str] = list()
-		cls.invalid_strings: List[str] = list()
-		cls.valid_strings.append('sfgsfg = { "tech_starbase_4" tech_modular_engineering }')
-		cls.valid_strings.append('dfgd = { "tech_starbase_4" }')
-		cls.invalid_strings.append('sfgsfgsf = {  }')
-		cls.invalid_strings.append('sgffd = "tech_starbase_4"')
-
-	def test_regex(self):
-		regex_testing(self)
-
-	def test_creation(self):
-		creation_testing(self)
+		TechCategoryTests.mySetUpClass(Lexeme.TechCategoryLexeme, LexemeTestStrings.TechCategoryValid, LexemeTestStrings.TechCategoryInvalid)
 
 
-class TechAreaTests(unittest.TestCase):
+class SetValueTests(unittest.LexemeTests):
 	@classmethod
 	def setUpClass(cls) -> None:
-		cls.tested_lexeme: type(Lexeme.Lexeme) = Lexeme.TechAreaLexeme
-		cls.valid_strings: List[str] = list()
-		cls.invalid_strings: List[str] = list()
-		cls.valid_strings.append('area = tech_starbase_4')
-		cls.invalid_strings.append('category = {  }')
-		cls.invalid_strings.append('sgffd = tech_starbase_4')
-
-	def test_regex(self):
-		regex_testing(self)
-
-	def test_creation(self):
-		creation_testing(self)
+		SetValueTests.mySetUpClass(Lexeme.SetValueLexeme, LexemeTestStrings.SetValueValid, LexemeTestStrings.SetValueInvalid)
 
 
-class HasValidCivicTests(unittest.TestCase):
+class TechAreaTests(unittest.LexemeTests):
 	@classmethod
 	def setUpClass(cls) -> None:
-		cls.tested_lexeme: type(Lexeme.Lexeme) = Lexeme.HasValidCivicLexeme
-		cls.valid_strings: List[str] = list()
-		cls.invalid_strings: List[str] = list()
-		cls.valid_strings.append('has_valid_civic = tech_starbase_4')
-		cls.invalid_strings.append('category = {  }')
-		cls.invalid_strings.append('sgffd = tech_starbase_4')
-
-	def test_regex(self):
-		regex_testing(self)
-
-	def test_creation(self):
-		creation_testing(self)
+		TechAreaTests.mySetUpClass(Lexeme.TechAreaLexeme, LexemeTestStrings.TechAreaValid, LexemeTestStrings.TechAreaInvalid)
 
 
-class HasTraditionTests(unittest.TestCase):
+class HasValidCivicTests(unittest.LexemeTests):
 	@classmethod
 	def setUpClass(cls) -> None:
-		cls.tested_lexeme: type(Lexeme.Lexeme) = Lexeme.HasValidCivicLexeme
-		cls.valid_strings: List[str] = list()
-		cls.invalid_strings: List[str] = list()
-		cls.valid_strings.append('has_tradition = tech_starbase_4')
-		cls.invalid_strings.append('category = {  }')
-		cls.invalid_strings.append('sgffd = tech_starbase_4')
+		HasValidCivicTests.mySetUpClass(Lexeme.HasValidCivicLexeme, LexemeTestStrings.HasValidCivicValid, LexemeTestStrings.HasValidCivicInvalid)
 
-	def test_regex(self):
-		regex_testing(self)
 
-	def test_creation(self):
-		creation_testing(self)
+class HasTraditionTests(unittest.LexemeTests):
+	@classmethod
+	def setUpClass(cls) -> None:
+		HasTraditionTests.mySetUpClass(Lexeme.HasTraditionLexeme, LexemeTestStrings.HasTraditionValid, LexemeTestStrings.HasTraditionInvalid)
 
 
 if __name__ == '__main__':
